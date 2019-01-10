@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.heshan.designpatterns.creational.builder.Computer;
+import com.heshan.designpatterns.creational.factory.Plan;
+import com.heshan.designpatterns.creational.factory.PlanFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         testBuilder();
+        testFactory();
     }
 
     private void testBuilder() {
@@ -21,6 +24,14 @@ public class MainActivity extends AppCompatActivity {
                 .setBluetoothEnabled(true)
                 .setBluetoothEnabled(true)
                 .build();
-        Log.d("Builder", computer.getHDD());
+        Log.d("testBuilder", computer.getHDD());
+    }
+
+    private void testFactory() {
+        PlanFactory planFactory = new PlanFactory();
+        Plan plan = planFactory.getPlan("DOMESTICPLAN");
+
+        plan.getRate();
+        plan.calculateBill(10);
     }
 }
