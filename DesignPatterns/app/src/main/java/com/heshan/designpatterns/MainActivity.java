@@ -4,6 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.heshan.designpatterns.creational.abstractFactory.AbstractFactory;
+import com.heshan.designpatterns.creational.abstractFactory.Bank;
+import com.heshan.designpatterns.creational.abstractFactory.FactoryCreator;
+import com.heshan.designpatterns.creational.abstractFactory.Loan;
 import com.heshan.designpatterns.creational.builder.Computer;
 import com.heshan.designpatterns.creational.factory.Plan;
 import com.heshan.designpatterns.creational.factory.PlanFactory;
@@ -17,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         testBuilder();
         testFactory();
+        testAbstractFactory();
     }
 
     private void testBuilder() {
@@ -33,5 +38,22 @@ public class MainActivity extends AppCompatActivity {
 
         plan.getRate();
         plan.calculateBill(10);
+    }
+
+    private void testAbstractFactory() {
+        String bankName = "HDFC";
+        String loanName = "HomeLoan";
+
+        AbstractFactory bankFactory = FactoryCreator.getFactory("Bank");
+        Bank b = bankFactory.getBank(bankName);
+
+        double rate = 10.5;
+        double loanAmount = 2000000;
+        int years = 10;
+
+        AbstractFactory loanFactory = FactoryCreator.getFactory("Loan");
+        Loan l = loanFactory.getLoan(loanName);
+        l.getInterestRate(rate);
+        l.calculateLoanPayment(loanAmount,years);
     }
 }
