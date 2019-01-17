@@ -13,7 +13,7 @@ public abstract class Loan {
         n = years * 12;
         rate = rate / 1200;
 
-        EMI = ((rate * Math.pow((1 + rate), n))/((Math.pow((1 + rate), n))-1)) * loanAmount;
-        System.out.println("your monthly EMI is "+ EMI +" for the amount"+loanAmount+" you have borrowed");
+        EMI = ((rate * Math.pow((1 + rate), n)) / ((Math.pow((1 + rate), n))-1)) * loanAmount;
+        System.out.println("your monthly EMI is "+ EMI +" for the amount"+ loanAmount +" you have borrowed");
     }
 }

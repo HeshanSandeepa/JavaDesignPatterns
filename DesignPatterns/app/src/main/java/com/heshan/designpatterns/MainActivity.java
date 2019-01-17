@@ -11,6 +11,8 @@ import com.heshan.designpatterns.creational.abstractFactory.Loan;
 import com.heshan.designpatterns.creational.builder.Computer;
 import com.heshan.designpatterns.creational.factory.Plan;
 import com.heshan.designpatterns.creational.factory.PlanFactory;
+import com.heshan.designpatterns.creational.prototype.EmployeeRecord;
+import com.heshan.designpatterns.creational.singleton.Helper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         testBuilder();
         testFactory();
         testAbstractFactory();
+        testSingleton();
+        testPrototype();
     }
 
     private void testBuilder() {
@@ -55,5 +59,16 @@ public class MainActivity extends AppCompatActivity {
         Loan l = loanFactory.getLoan(loanName);
         l.getInterestRate(rate);
         l.calculateLoanPayment(loanAmount,years);
+    }
+
+    private void testSingleton() {
+        Helper helper = Helper.getHelper();
+        helper.doHelper();
+    }
+
+    private void testPrototype() {
+        EmployeeRecord employeeRecord = new EmployeeRecord();
+        EmployeeRecord employeeRecord1 = (EmployeeRecord) employeeRecord.clone();
+        EmployeeRecord employeeRecord2 = (EmployeeRecord) employeeRecord.clone();
     }
 }
