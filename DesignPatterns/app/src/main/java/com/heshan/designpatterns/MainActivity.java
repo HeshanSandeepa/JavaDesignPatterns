@@ -11,6 +11,7 @@ import com.heshan.designpatterns.creational.abstractFactory.Loan;
 import com.heshan.designpatterns.creational.builder.Computer;
 import com.heshan.designpatterns.creational.factory.Plan;
 import com.heshan.designpatterns.creational.factory.PlanFactory;
+import com.heshan.designpatterns.creational.objectPool.ObjectPoolDemo;
 import com.heshan.designpatterns.creational.prototype.EmployeeRecord;
 import com.heshan.designpatterns.creational.singleton.Helper;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         testAbstractFactory();
         testSingleton();
         testPrototype();
+        testObjectPool();
     }
 
     private void testBuilder() {
@@ -70,5 +72,12 @@ public class MainActivity extends AppCompatActivity {
         EmployeeRecord employeeRecord = new EmployeeRecord();
         EmployeeRecord employeeRecord1 = (EmployeeRecord) employeeRecord.clone();
         EmployeeRecord employeeRecord2 = (EmployeeRecord) employeeRecord.clone();
+    }
+
+    private void testObjectPool() {
+        ObjectPoolDemo op=new ObjectPoolDemo();
+        op.setUp();
+        op.tearDown();
+        op.testObjectPool();
     }
 }
