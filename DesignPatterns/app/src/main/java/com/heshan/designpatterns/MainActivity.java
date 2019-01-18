@@ -14,6 +14,10 @@ import com.heshan.designpatterns.creational.factory.PlanFactory;
 import com.heshan.designpatterns.creational.objectPool.ObjectPoolDemo;
 import com.heshan.designpatterns.creational.prototype.EmployeeRecord;
 import com.heshan.designpatterns.creational.singleton.Helper;
+import com.heshan.designpatterns.structural.adapter.BirdAdapter;
+import com.heshan.designpatterns.structural.adapter.PlasticToyDuck;
+import com.heshan.designpatterns.structural.adapter.Sparrow;
+import com.heshan.designpatterns.structural.adapter.ToyDuck;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         testSingleton();
         testPrototype();
         testObjectPool();
+
+        testAdapter();
+
     }
 
     private void testBuilder() {
@@ -79,5 +86,25 @@ public class MainActivity extends AppCompatActivity {
         op.setUp();
         op.tearDown();
         op.testObjectPool();
+    }
+
+    private void testAdapter() {
+        Sparrow sparrow = new Sparrow();
+        System.out.println("Sparrow...");
+        sparrow.fly();
+        sparrow.makeSound();
+
+
+        ToyDuck toyDuck = new PlasticToyDuck();
+        System.out.println("ToyDuck...");
+        toyDuck.squeak();
+
+
+        // Wrap a bird in a birdAdapter so that it
+        // behaves like toy duck
+        ToyDuck birdAdapter = new BirdAdapter(sparrow);
+        // toy duck behaving like a bird
+        System.out.println("BirdAdapter...");
+        birdAdapter.squeak();
     }
 }
