@@ -18,6 +18,7 @@ import com.heshan.designpatterns.structural.adapter.BirdAdapter;
 import com.heshan.designpatterns.structural.adapter.PlasticToyDuck;
 import com.heshan.designpatterns.structural.adapter.Sparrow;
 import com.heshan.designpatterns.structural.adapter.ToyDuck;
+import com.heshan.designpatterns.structural.bridge.BridgePattern;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         testObjectPool();
 
         testAdapter();
+        testBridge();
 
     }
 
@@ -106,5 +108,10 @@ public class MainActivity extends AppCompatActivity {
         // toy duck behaving like a bird
         System.out.println("BirdAdapter...");
         birdAdapter.squeak();
+    }
+
+    private void testBridge() {
+        BridgePattern bridgePattern = new BridgePattern();
+        bridgePattern.test();
     }
 }
