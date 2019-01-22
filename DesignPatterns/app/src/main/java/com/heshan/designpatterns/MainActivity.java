@@ -19,6 +19,9 @@ import com.heshan.designpatterns.structural.adapter.PlasticToyDuck;
 import com.heshan.designpatterns.structural.adapter.Sparrow;
 import com.heshan.designpatterns.structural.adapter.ToyDuck;
 import com.heshan.designpatterns.structural.bridge.BridgePattern;
+import com.heshan.designpatterns.structural.composite.CompanyDirectory;
+import com.heshan.designpatterns.structural.composite.Developer;
+import com.heshan.designpatterns.structural.composite.Manager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         testAdapter();
         testBridge();
+        testComposite();
 
     }
 
@@ -113,5 +117,26 @@ public class MainActivity extends AppCompatActivity {
     private void testBridge() {
         BridgePattern bridgePattern = new BridgePattern();
         bridgePattern.test();
+    }
+
+    //client
+    private void testComposite() {
+        Developer dev1 = new Developer(100, "L", "Pro Developer");
+        Developer dev2 = new Developer(101, "V", "Developer");
+        CompanyDirectory engDirectory = new CompanyDirectory();
+        engDirectory.addEmployee(dev1);
+        engDirectory.addEmployee(dev2);
+
+        Manager man1 = new Manager(200, "K", "SEO Manager");
+        Manager man2 = new Manager(201, "V", "K's Manager");
+
+        CompanyDirectory accDirectory = new CompanyDirectory();
+        accDirectory.addEmployee(man1);
+        accDirectory.addEmployee(man2);
+
+        CompanyDirectory directory = new CompanyDirectory();
+        directory.addEmployee(engDirectory);
+        directory.addEmployee(accDirectory);
+        directory.showEmployeeDetails();
     }
 }
