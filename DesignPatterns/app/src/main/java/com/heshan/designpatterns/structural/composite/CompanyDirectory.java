@@ -40,7 +40,6 @@ The Composite Pattern has four participants:
 
 
 //composite
-
 package com.heshan.designpatterns.structural.composite;
 
 import java.util.ArrayList;

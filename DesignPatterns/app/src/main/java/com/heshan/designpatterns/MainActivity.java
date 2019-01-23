@@ -22,6 +22,7 @@ import com.heshan.designpatterns.structural.bridge.BridgePattern;
 import com.heshan.designpatterns.structural.composite.CompanyDirectory;
 import com.heshan.designpatterns.structural.composite.Developer;
 import com.heshan.designpatterns.structural.composite.Manager;
+import com.heshan.designpatterns.structural.decorator.PizzaStore;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         testAdapter();
         testBridge();
         testComposite();
+        testDecorator();
 
     }
 
@@ -138,5 +140,10 @@ public class MainActivity extends AppCompatActivity {
         directory.addEmployee(engDirectory);
         directory.addEmployee(accDirectory);
         directory.showEmployeeDetails();
+    }
+
+    private void testDecorator() {
+        PizzaStore pizzaStore = new PizzaStore();
+        pizzaStore.test();
     }
 }
