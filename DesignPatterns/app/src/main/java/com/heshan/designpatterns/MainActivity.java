@@ -23,6 +23,12 @@ import com.heshan.designpatterns.structural.composite.CompanyDirectory;
 import com.heshan.designpatterns.structural.composite.Developer;
 import com.heshan.designpatterns.structural.composite.Manager;
 import com.heshan.designpatterns.structural.decorator.PizzaStore;
+import com.heshan.designpatterns.structural.facade.HotelKeeper;
+import com.heshan.designpatterns.structural.flyWeight.Player;
+import com.heshan.designpatterns.structural.flyWeight.PlayerFactory;
+
+import static com.heshan.designpatterns.structural.flyWeight.CounterStrike.getRandPlayerType;
+import static com.heshan.designpatterns.structural.flyWeight.CounterStrike.getRandWeapon;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         testBridge();
         testComposite();
         testDecorator();
+        testFacade();
+        testFlyWeight();
 
     }
 
@@ -145,5 +153,30 @@ public class MainActivity extends AppCompatActivity {
     private void testDecorator() {
         PizzaStore pizzaStore = new PizzaStore();
         pizzaStore.test();
+    }
+
+    private void testFacade() {
+        HotelKeeper keeper = new HotelKeeper();
+
+        String v = keeper.getVeganMenu();
+        String nv = keeper.getNonVeganMenu();
+    }
+
+    private void testFlyWeight() {
+         /* Assume that we have a total of 10 players
+           in the game. */
+        for (int i = 0; i < 10; i++)
+        {
+            /* getPlayer() is called simply using the class
+               name since the method is a static one */
+            Player p = PlayerFactory.getPlayer(getRandPlayerType());
+
+            /* Assign a weapon chosen randomly uniformly
+               from the weapon array  */
+            p.assignWeapon(getRandWeapon());
+
+            // Send this player on a mission
+            p.mission();
+        }
     }
 }
