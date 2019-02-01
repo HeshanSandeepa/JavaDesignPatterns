@@ -1,9 +1,10 @@
 package com.heshan.designpatterns;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.heshan.designpatterns.behavioral.chainOfResponsibiity.Sender;
 import com.heshan.designpatterns.creational.abstractFactory.AbstractFactory;
 import com.heshan.designpatterns.creational.abstractFactory.Bank;
 import com.heshan.designpatterns.creational.abstractFactory.FactoryCreator;
@@ -26,6 +27,8 @@ import com.heshan.designpatterns.structural.decorator.PizzaStore;
 import com.heshan.designpatterns.structural.facade.HotelKeeper;
 import com.heshan.designpatterns.structural.flyWeight.Player;
 import com.heshan.designpatterns.structural.flyWeight.PlayerFactory;
+import com.heshan.designpatterns.structural.proxy.Proxy;
+import com.heshan.designpatterns.structural.proxy.RealSubject;
 
 import static com.heshan.designpatterns.structural.flyWeight.CounterStrike.getRandPlayerType;
 import static com.heshan.designpatterns.structural.flyWeight.CounterStrike.getRandWeapon;
@@ -50,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
         testDecorator();
         testFacade();
         testFlyWeight();
+        testProxy();
 
+        testChainOfResponsibility();
     }
 
     private void testBuilder() {
@@ -178,5 +183,15 @@ public class MainActivity extends AppCompatActivity {
             // Send this player on a mission
             p.mission();
         }
+    }
+
+    private void testProxy() {
+        Proxy proxy = new Proxy(new RealSubject());
+        System.out.println(proxy.operation());
+    }
+
+    private void testChainOfResponsibility() {
+        Sender sender = new Sender();
+        sender.test();
     }
 }

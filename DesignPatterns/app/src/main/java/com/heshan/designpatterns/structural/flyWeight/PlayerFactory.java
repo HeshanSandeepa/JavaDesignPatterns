@@ -36,7 +36,7 @@ public class PlayerFactory {
 
     /* HashMap stores the reference to the object
      of Terrorist(TS) or CounterTerrorist(CT).  */
-    private static HashMap <String, Player> hm =  new HashMap<String, Player>();
+    private static HashMap <String, Player> hm = new HashMap<>();
 
     public static Player getPlayer(String type) {
         Player p = null;
@@ -59,7 +59,6 @@ public class PlayerFactory {
                 default :
                     System.out.println("Unreachable code!");
             }
-
             // Once created insert it into the HashMap
             hm.put(type, p);
         }
