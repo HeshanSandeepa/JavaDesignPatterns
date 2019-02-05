@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.heshan.designpatterns.behavioral.chainOfResponsibiity.Sender;
+import com.heshan.designpatterns.behavioral.command.Light;
+import com.heshan.designpatterns.behavioral.command.LightOffCommand;
+import com.heshan.designpatterns.behavioral.command.SimpleRemoteControl;
 import com.heshan.designpatterns.creational.abstractFactory.AbstractFactory;
 import com.heshan.designpatterns.creational.abstractFactory.Bank;
 import com.heshan.designpatterns.creational.abstractFactory.FactoryCreator;
@@ -193,5 +196,12 @@ public class MainActivity extends AppCompatActivity {
     private void testChainOfResponsibility() {
         Sender sender = new Sender();
         sender.test();
+    }
+
+    private void testCommand() {
+        SimpleRemoteControl simpleRemoteControl = new SimpleRemoteControl();
+        Light light = new Light();
+        simpleRemoteControl.setCommand(new LightOffCommand(light));
+        simpleRemoteControl.buttonWasPressed();
     }
 }
