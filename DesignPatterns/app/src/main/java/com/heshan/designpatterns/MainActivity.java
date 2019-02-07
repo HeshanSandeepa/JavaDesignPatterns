@@ -8,6 +8,12 @@ import com.heshan.designpatterns.behavioral.chainOfResponsibiity.Sender;
 import com.heshan.designpatterns.behavioral.command.Light;
 import com.heshan.designpatterns.behavioral.command.LightOffCommand;
 import com.heshan.designpatterns.behavioral.command.SimpleRemoteControl;
+import com.heshan.designpatterns.behavioral.interpreter.AndExpression;
+import com.heshan.designpatterns.behavioral.interpreter.Expression;
+import com.heshan.designpatterns.behavioral.interpreter.OrExpression;
+import com.heshan.designpatterns.behavioral.interpreter.TerminalExpression;
+import com.heshan.designpatterns.behavioral.iterator.CollectionOfNames;
+import com.heshan.designpatterns.behavioral.iterator.Iterator;
 import com.heshan.designpatterns.creational.abstractFactory.AbstractFactory;
 import com.heshan.designpatterns.creational.abstractFactory.Bank;
 import com.heshan.designpatterns.creational.abstractFactory.FactoryCreator;
@@ -59,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         testProxy();
 
         testChainOfResponsibility();
+        testCommand();
+        testInterpreter();
+        testIterator();
     }
 
     private void testBuilder() {
@@ -203,5 +212,31 @@ public class MainActivity extends AppCompatActivity {
         Light light = new Light();
         simpleRemoteControl.setCommand(new LightOffCommand(light));
         simpleRemoteControl.buttonWasPressed();
+    }
+
+    private void testInterpreter() {
+        Expression person1 = new TerminalExpression("Kushagra");
+        Expression person2 = new TerminalExpression("Lokesh");
+        Expression isSingle = new OrExpression(person1, person2);
+
+        Expression vikram = new TerminalExpression("Vikram");
+        Expression committed = new TerminalExpression("Committed");
+        Expression isCommitted = new AndExpression(vikram, committed);
+
+        System.out.println(isSingle.interpreter("Kushagra"));
+        System.out.println(isSingle.interpreter("Lokesh"));
+        System.out.println(isSingle.interpreter("Achint"));
+
+        System.out.println(isCommitted.interpreter("Committed, Vikram"));
+        System.out.println(isCommitted.interpreter("Single, Vikram"));
+    }
+
+    private void testIterator() {
+        CollectionOfNames collectionOfNames = new CollectionOfNames();
+
+        for(Iterator iter = collectionOfNames.getIterator(); iter.hasNext();){
+            String name = (String)iter.next();
+            System.out.println("Name : " + name);
+        }
     }
 }
