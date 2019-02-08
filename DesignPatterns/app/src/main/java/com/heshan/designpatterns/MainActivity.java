@@ -14,6 +14,10 @@ import com.heshan.designpatterns.behavioral.interpreter.OrExpression;
 import com.heshan.designpatterns.behavioral.interpreter.TerminalExpression;
 import com.heshan.designpatterns.behavioral.iterator.CollectionOfNames;
 import com.heshan.designpatterns.behavioral.iterator.Iterator;
+import com.heshan.designpatterns.behavioral.mediator.ATCMediator;
+import com.heshan.designpatterns.behavioral.mediator.Flight;
+import com.heshan.designpatterns.behavioral.mediator.IATCMediator;
+import com.heshan.designpatterns.behavioral.mediator.Runway;
 import com.heshan.designpatterns.creational.abstractFactory.AbstractFactory;
 import com.heshan.designpatterns.creational.abstractFactory.Bank;
 import com.heshan.designpatterns.creational.abstractFactory.FactoryCreator;
@@ -238,5 +242,16 @@ public class MainActivity extends AppCompatActivity {
             String name = (String)iter.next();
             System.out.println("Name : " + name);
         }
+    }
+
+    private void testMediator() {
+        IATCMediator atcMediator = new ATCMediator();
+        Flight sparrow101 = new Flight(atcMediator);
+        Runway mainRunway = new Runway(atcMediator);
+        atcMediator.registerFlight(sparrow101);
+        atcMediator.registerRunway(mainRunway);
+        sparrow101.getReady();
+        mainRunway.land();
+        sparrow101.land();
     }
 }
