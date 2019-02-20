@@ -18,6 +18,20 @@ import com.heshan.designpatterns.behavioral.mediator.ATCMediator;
 import com.heshan.designpatterns.behavioral.mediator.Flight;
 import com.heshan.designpatterns.behavioral.mediator.IATCMediator;
 import com.heshan.designpatterns.behavioral.mediator.Runway;
+import com.heshan.designpatterns.behavioral.momento.Caretaker;
+import com.heshan.designpatterns.behavioral.momento.Originator;
+import com.heshan.designpatterns.behavioral.observer.AverageScoreDisplay;
+import com.heshan.designpatterns.behavioral.observer.CricketData;
+import com.heshan.designpatterns.behavioral.observer.CurrentScoreDisplay;
+import com.heshan.designpatterns.behavioral.state.AlertStateContext;
+import com.heshan.designpatterns.behavioral.state.Silent;
+import com.heshan.designpatterns.behavioral.strategy.Fighter;
+import com.heshan.designpatterns.behavioral.strategy.JumpBehavior;
+import com.heshan.designpatterns.behavioral.strategy.KickBehavior;
+import com.heshan.designpatterns.behavioral.strategy.LongJump;
+import com.heshan.designpatterns.behavioral.strategy.RussianFighter;
+import com.heshan.designpatterns.behavioral.strategy.ShortJump;
+import com.heshan.designpatterns.behavioral.strategy.TornadoKick;
 import com.heshan.designpatterns.creational.abstractFactory.AbstractFactory;
 import com.heshan.designpatterns.creational.abstractFactory.Bank;
 import com.heshan.designpatterns.creational.abstractFactory.FactoryCreator;
@@ -72,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
         testCommand();
         testInterpreter();
         testIterator();
+        testMediator();
+        testMomento();
+        testObserver();
+        testState();
     }
 
     private void testBuilder() {
@@ -253,5 +271,74 @@ public class MainActivity extends AppCompatActivity {
         sparrow101.getReady();
         mainRunway.land();
         sparrow101.land();
+    }
+
+    private void testMomento() {
+        Caretaker caretaker = new Caretaker();
+        Originator originator = new Originator();
+        originator.setState("State1");
+        originator.setState("State2");
+        caretaker.addMemento( originator.save() );
+        originator.setState("State3");
+        caretaker.addMemento( originator.save() );
+        originator.setState("State4");
+        originator.restore( caretaker.getMemento() );
+    }
+
+    private void testObserver() {
+        // create objects for testing
+        AverageScoreDisplay averageScoreDisplay =
+                new AverageScoreDisplay();
+        CurrentScoreDisplay currentScoreDisplay =
+                new CurrentScoreDisplay();
+
+        // pass the displays to Cricket data
+        CricketData cricketData = new CricketData();
+
+        // register display elements
+        cricketData.registerObserver(averageScoreDisplay);
+        cricketData.registerObserver(currentScoreDisplay);
+
+        // in real app you would have some logic to
+        // call this function when data changes
+        cricketData.dataChanged();
+
+        //remove an observer
+        cricketData.unregisterObserver(averageScoreDisplay);
+
+        // now only currentScoreDisplay gets the
+        // notification
+        cricketData.dataChanged();
+    }
+
+    private void testState() {
+        AlertStateContext stateContext = new AlertStateContext();
+        stateContext.alert();
+        stateContext.alert();
+        stateContext.setState(new Silent());
+        stateContext.alert();
+        stateContext.alert();
+        stateContext.alert();
+    }
+
+    private void testStrategy() {
+        // let us make some behaviors first
+        JumpBehavior shortJump = new ShortJump();
+        JumpBehavior LongJump = new LongJump();
+        KickBehavior tornadoKick = new TornadoKick();
+
+        // Make a fighter with desired behaviors
+        Fighter russian = new RussianFighter(tornadoKick,shortJump);
+        russian.display();
+
+        // Test behaviors
+        russian.punch();
+        russian.kick();
+        russian.jump();
+
+        // Change behavior dynamically (algorithms are
+        // interchangeable)
+        russian.setJumpBehavior(LongJump);
+        russian.jump();
     }
 }
