@@ -32,6 +32,9 @@ import com.heshan.designpatterns.behavioral.strategy.LongJump;
 import com.heshan.designpatterns.behavioral.strategy.RussianFighter;
 import com.heshan.designpatterns.behavioral.strategy.ShortJump;
 import com.heshan.designpatterns.behavioral.strategy.TornadoKick;
+import com.heshan.designpatterns.behavioral.template.NetOrder;
+import com.heshan.designpatterns.behavioral.template.OrderProcessTemplate;
+import com.heshan.designpatterns.behavioral.template.StoreOrder;
 import com.heshan.designpatterns.creational.abstractFactory.AbstractFactory;
 import com.heshan.designpatterns.creational.abstractFactory.Bank;
 import com.heshan.designpatterns.creational.abstractFactory.FactoryCreator;
@@ -90,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
         testMomento();
         testObserver();
         testState();
+        testStrategy();
+        testTemplate();
     }
 
     private void testBuilder() {
@@ -341,4 +346,15 @@ public class MainActivity extends AppCompatActivity {
         russian.setJumpBehavior(LongJump);
         russian.jump();
     }
+
+    private void testTemplate() {
+        OrderProcessTemplate netOrder = new NetOrder();
+        netOrder.processOrder(true);
+
+        System.out.println();
+
+        OrderProcessTemplate storeOrder = new StoreOrder();
+        storeOrder.processOrder(true);
+    }
+
 }
